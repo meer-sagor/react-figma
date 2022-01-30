@@ -1,0 +1,10 @@
+.shape-container {
+  width: 26rem;
+  background: var(--shape-container-bg);
+  border-radius: .3em;
+}
+.shape-container .title{
+  text-align: center;
+  text-transform: capitalize;
+  padding: 1rem 0;
+}

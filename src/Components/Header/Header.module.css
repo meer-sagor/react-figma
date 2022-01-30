@@ -1,0 +1,13 @@
+.header-bg {
+  background: white;
+  box-shadow: 0 0.5rem 0.6rem rgba(0, 0, 0, 0.2);
+}
+.header {
+  width: 90%;
+  max-width: var(--full-container-width);
+  margin: 0 auto;
+  padding: .6rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,8 @@
+.main-content {
+  width: var(--main-container-width);
+  height: 80vh;
+  background: white;
+  border-radius: .3em;
+  border: .2rem solid #617D5E;
+  margin: 0 3.2rem;
+}
