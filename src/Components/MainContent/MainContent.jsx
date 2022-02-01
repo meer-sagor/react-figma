@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Stage, Layer, Rect, Circle } from "react-konva";
+import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
 
 import classes from "./MainContent.module.css";
 const MainContent = () => {
   const { toggle, defaultText } = useSelector((state) => state.editText);
+  const { rectangle, circle } = useSelector((state) => state.shapes);
+  const { x, y, width, height } = useSelector((state) => state.properties);
   const dispatch = useDispatch();
 
   return (
@@ -15,7 +18,7 @@ const MainContent = () => {
           {toggle ? (
             <h3 onDoubleClick={() => dispatch(setToggle())}>{defaultText}</h3>
           ) : (
-            <input
+            <Input
               type="text"
               value={defaultText}
               onChange={(event) => dispatch(setNewText(event.target.value))}
@@ -27,15 +30,27 @@ const MainContent = () => {
         <div id={classes.content}>
           <Stage height="400" width="487" container={classes.content}>
             <Layer>
-              <Rect
-                x={20}
-                y={50}
-                width={100}
-                height={100}
-                fill="red"
-                draggable="true"
-              />
-              <Circle x={200} y={100} radius={50} fill="green" draggable />
+              {rectangle.rectangles.map((rectangle) => (
+                <Rect
+                  key={rectangle.id}
+                  x={x}
+                  y={y}
+                  width={width}
+                  height={height}
+                  fill={rectangle.fill}
+                  draggable
+                />
+              ))}
+              {circle.circles.map((cir) => (
+                // console.log(cir)
+                <Circle
+                  x={cir.x}
+                  y={cir.y}
+                  radius={cir.radius}
+                  fill={cir.fill}
+                  draggable
+                />
+              ))}
             </Layer>
           </Stage>
         </div>

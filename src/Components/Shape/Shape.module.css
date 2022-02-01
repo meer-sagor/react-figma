@@ -15,7 +15,7 @@
   cursor: pointer;
   background: #4dc2e7;
 }
-.shape-actions button span{
+.shape-actions button span {
   display: block;
   margin-left: 0.3rem;
 }
@@ -23,12 +23,50 @@
   margin-top: 2rem;
   background: red;
 }
+
 .shape-content {
   background: var(--shape-container-bg);
   border-radius: 0.3em;
 }
+
 .shape-content .title {
   text-align: center;
   text-transform: capitalize;
   padding: 1rem 0;
+}
+.shape-content .rectangles,
+.shape-content .circles,
+.shape-content .triangles {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.shape-content .rectangles p,
+.shape-content .circles p,
+.shape-content .triangles p {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.shape-content .rectangles p span,
+.shape-content .circles p span,
+.shape-content .triangles p span {
+  display: block;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+}
+
+.shape-content .rectangles input,
+.shape-content .circles input,
+.shape-content .triangles input {
+  text-align: center;
+  margin-bottom: 0;
+}
+.edit-shape__layer--text {
+  display: flex;
+  align-items: center;
+}
+.edit-shape__layer--text span{
+  font-size: 2rem;
+  margin-right: 2rem;
 }

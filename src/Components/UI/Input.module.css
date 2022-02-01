@@ -21,6 +21,9 @@
   padding: 0.5em;
   margin-bottom: 1.5rem;
 }
+.form-control input[type='color']{
+  background: red;
+}
 .form-control input:focus {
   outline: none;
 }

@@ -2,7 +2,8 @@
   width: 26rem;
   text-align: center;
 }
-.properties-actions{
+
+.properties-actions {
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,14 @@
   display: flex;
   background: #fdaf53;
 }
-.button-alt span{
+.button-alt span {
   display: block;
   margin-left: 0.5rem;
+}
+
+div.properties[disabled],
+.properties-actions button[disabled],
+.properties-content input[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

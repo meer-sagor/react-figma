@@ -6,7 +6,7 @@ const Input = (props) => {
   return (
     <div className={classes["form-control"]}>
       <span>{props.label}</span>
-      <input type="text" />
+      <input {...props} />
     </div>
   );
 };
