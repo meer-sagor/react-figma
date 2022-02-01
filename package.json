@@ -12,11 +12,17 @@
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
+    "@tippyjs/react": "^4.2.6",
     "konva": "^8.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-konva": "^17.0.2-5",
+    "react-redux": "^7.2.6",
     "react-scripts": "^5.0.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [

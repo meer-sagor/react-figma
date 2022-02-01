@@ -1,0 +1,11 @@
+.export-action {
+  display: flex;
+  flex-direction: column;
+}
+.border {
+  border-bottom: 1px solid gray;
+  margin: 0.3em 0.8em;
+}
+.export-action__button {
+  background: none;
+}

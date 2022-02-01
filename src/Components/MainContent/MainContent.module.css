@@ -1,6 +1,12 @@
-.main-content {
+.main-content{
   width: var(--main-container-width);
-  height: 80vh;
+  text-align: center;
+}
+.main-content__title{
+  margin-bottom: 2rem;
+}
+#content {
+  height: 60vh;
   background: white;
   border-radius: .3em;
   border: .2rem solid #617D5E;

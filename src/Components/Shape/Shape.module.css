@@ -1,9 +1,33 @@
-.shape-container {
+.shape {
   width: 26rem;
-  background: var(--shape-container-bg);
-  border-radius: .3em;
 }
-.shape-container .title{
+.shape-actions button {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: inherit;
+  margin-bottom: 2rem;
+  width: 100%;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.3em;
+  text-align: center;
+  cursor: pointer;
+  background: #4dc2e7;
+}
+.shape-actions button span{
+  display: block;
+  margin-left: 0.3rem;
+}
+.shape-actions select option {
+  margin-top: 2rem;
+  background: red;
+}
+.shape-content {
+  background: var(--shape-container-bg);
+  border-radius: 0.3em;
+}
+.shape-content .title {
   text-align: center;
   text-transform: capitalize;
   padding: 1rem 0;

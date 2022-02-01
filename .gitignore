@@ -2,7 +2,6 @@ node_modules/
 
 
 # lock firle
-
 package-lock.json
 yarn.lock
 yarn-error.log

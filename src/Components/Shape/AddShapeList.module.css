@@ -1,0 +1,30 @@
+.addShape {
+  margin-bottom: 1rem;
+  margin-left: 3rem;
+}
+.addShape:first-child {
+  margin-top: 2rem;
+}
+.rectangle,
+.circle,
+.triangle {
+  cursor: pointer;
+  width: 21rem;
+}
+
+.rectangle p,
+.circle p,
+.triangle p {
+  display: flex;
+  align-items: center;
+}
+.circle {
+  margin: 1rem 0;
+}
+.rectangle p span,
+.circle p span,
+.triangle p span {
+  font-size: 2rem;
+  display: block;
+  margin-right: 1rem;
+}

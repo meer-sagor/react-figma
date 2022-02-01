@@ -1,0 +1,26 @@
+.form-control {
+  position: relative;
+}
+.form-control span {
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  display: block;
+  position: absolute;
+  top: 0.8rem;
+  left: 2.3rem;
+  color: #898f88;
+  pointer-events: none;
+}
+
+.form-control input {
+  font-size: inherit;
+  text-align: right;
+  width: 90%;
+  border: 0.1rem solid #617d5e;
+  border-radius: 0.3em;
+  padding: 0.5em;
+  margin-bottom: 1.5rem;
+}
+.form-control input:focus {
+  outline: none;
+}

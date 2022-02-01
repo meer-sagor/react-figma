@@ -1,10 +1,27 @@
-.properties-container {
+.properties {
   width: 26rem;
+  text-align: center;
+}
+.properties-actions{
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.properties-content {
   background: var(--shape-container-bg);
   border-radius: 0.3em;
 }
-.properties-container .title {
-  text-align: center;
+.properties-content .title {
   text-transform: capitalize;
   padding: 1rem 0;
+}
+
+.button-alt {
+  display: flex;
+  background: #fdaf53;
+}
+.button-alt span{
+  display: block;
+  margin-left: 0.5rem;
 }

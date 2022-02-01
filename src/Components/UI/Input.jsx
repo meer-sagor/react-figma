@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const Input = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+import classes from "./Input.module.css";
 
-export default Input
+const Input = (props) => {
+  return (
+    <div className={classes["form-control"]}>
+      <span>{props.label}</span>
+      <input type="text" />
+    </div>
+  );
+};
+
+export default Input;
