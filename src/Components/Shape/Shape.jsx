@@ -1,6 +1,5 @@
 import React from "react";
 import Tippy from "@tippyjs/react";
-import { useSelector } from "react-redux";
 import { GoTriangleDown } from "react-icons/go";
 import AddShapeList from "./AddShapes";
 import Rectangle from "./Rectangle";

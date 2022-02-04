@@ -75,7 +75,7 @@ const MainContent = () => {
                   width={rectangle.width}
                   height={rectangle.height}
                   fill={rectangle.fill}
-                  // draggable
+                  draggable
                 />
               ))}
             </Layer>

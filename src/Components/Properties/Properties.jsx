@@ -91,6 +91,7 @@ const Properties = ({ handlerExport }) => {
           label={`color`}
           type="color"
           value={values?.fill}
+          style={{ background: `${values?.fill}` }}
           onChange={(event) => dispatch(setRectangleColor(event.target.value))}
         />
       </div>

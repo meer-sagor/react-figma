@@ -9,26 +9,10 @@ const rectangleShapeSlice = createSlice({
   },
   reducers: {
     setShapeToggle: (state, action) => {
-      const { id } = action.payload;
-      const existingRectangleIndex = state.rectangles.findIndex(
-        (rectangleIndex) => rectangleIndex.id === id
-      );
-      const existingRectangle = state.rectangles[existingRectangleIndex];
-
-      if (existingRectangle) {
-        let updatedRectangle = {
-          ...existingRectangle,
-          toggle: (existingRectangle.toggle = false),
-        };
-        let updatedRectangles = [...state.rectangles];
-        updatedRectangles[existingRectangleIndex] = updatedRectangle;
-      }
-      return;
-
-      // return {
-      //   ...state,
-      //   shapeToggle: false,
-      // };
+      return {
+        ...state,
+        shapeToggle: false,
+      };
     },
     setShapeText: (state, action) => {
       const { id, values } = action.payload;

@@ -5,7 +5,6 @@ const editableTextSlice = createSlice({
   initialState: {
     toggle: true,
     defaultText: "meer sagor",
-    defaultRectangleText: "rectangle",
   },
   reducers: {
     setToggle: (state) => {
@@ -20,12 +19,6 @@ const editableTextSlice = createSlice({
         defaultText: action.payload,
       };
     },
-    setRectangleText: (state, action) => {
-      return {
-        ...state,
-        defaultRectangleText: action.payload,
-      };
-    },
     backToView: (state, action) => {
       if (action.payload === "Enter" || action.payload === "Escape") {
         return {
@@ -37,7 +30,7 @@ const editableTextSlice = createSlice({
   },
 });
 
-export const { setToggle, setNewText, setRectangleText, backToView } =
+export const { setToggle, setNewText,  backToView } =
   editableTextSlice.actions;
 
 export default editableTextSlice.reducer;
