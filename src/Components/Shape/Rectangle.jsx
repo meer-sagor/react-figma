@@ -12,18 +12,13 @@ import {
   backToShape,
 } from "../../Store/RectangleShapeSlice";
 
-
 const Rectangle = () => {
-  const { shapeToggle, rectangles } = useSelector(
-    (state) => state.rectangle
-  );
+  const { shapeToggle, rectangles } = useSelector((state) => state.rectangle);
   const dispatch = useDispatch();
 
-
-  const onDoubleClickHandler = (rect) => {
-    dispatch(setShapeToggle(rect));
+  const onDoubleClickHandler = () => {
+    dispatch(setShapeToggle());
   };
-
 
   const inputChangeHandler = (id, event) => {
     const values = event.target.value;
@@ -33,9 +28,10 @@ const Rectangle = () => {
     };
     dispatch(setShapeText(obj));
   };
-  const onKeyDownHandler = () => {
-    
-    dispatch(backToShape());
+  const onKeyDownHandler = (event) => {
+    const keys = event.key;
+
+    dispatch(backToShape(keys));
   };
   return (
     <div
@@ -43,7 +39,7 @@ const Rectangle = () => {
       style={{ display: rectangles.length === 0 ? "none" : "block" }}
     >
       {rectangles.map((rect) =>
-       shapeToggle ? (
+        shapeToggle ? (
           <p
             key={rect.id}
             onDoubleClick={() => onDoubleClickHandler(rect)}
@@ -65,7 +61,7 @@ const Rectangle = () => {
               type="text"
               value={rect.name}
               onChange={(event) => inputChangeHandler(rect.id, event)}
-              onKeyDown={onKeyDownHandler()}
+              onKeyDown={onKeyDownHandler}
             />
           </div>
         )

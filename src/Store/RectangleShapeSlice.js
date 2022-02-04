@@ -8,7 +8,7 @@ const rectangleShapeSlice = createSlice({
     selectedRectangle: {},
   },
   reducers: {
-    setShapeToggle: (state, action) => {
+    setShapeToggle: (state) => {
       return {
         ...state,
         shapeToggle: false,
@@ -19,9 +19,7 @@ const rectangleShapeSlice = createSlice({
       const existingRectangleIndex = state.rectangles.findIndex(
         (rectangleIndex) => rectangleIndex.id === id
       );
-
       const existingRectangle = state.rectangles[existingRectangleIndex];
-
       if (existingRectangle) {
         let updatedRectangle = {
           ...existingRectangle,
@@ -33,32 +31,8 @@ const rectangleShapeSlice = createSlice({
       return;
     },
     backToShape: (state, action) => {
-      // const { keys, rect } = action.payload;
-      // const { id } = rect;
-      // const existingRectangleIndex = state.rectangles.findIndex(
-      //   (rectangleIndex) => rectangleIndex.id === id
-      // );
-      // const existingRectangle = state.rectangles[existingRectangleIndex];
-
-      // if (existingRectangle ) {
-      //     let updatedRectangle = {
-      //       ...existingRectangle,
-      //       toggle: (existingRectangle.toggle = false),
-      //     };
-      //     let updatedRectangles = [...state.rectangles];
-      //     updatedRectangles[existingRectangleIndex] = updatedRectangle;
-      //   }
-      //   return;
-      // if (keys === "Enter" || keys === "Escape") {
-      //   let updatedRectangle = {
-      //     ...existingRectangle,
-      //     toggle: (existingRectangle.toggle = false),
-      //   };
-      //   let updatedRectangles = [...state.rectangles];
-      //   updatedRectangles[existingRectangleIndex] = updatedRectangle;
-      // }
-
-      if (action.payload === "Enter" || action.payload === "Escape") {
+      const keys = action.payload;
+      if (keys === "Enter" || keys === "Escape") {
         return {
           ...state,
           shapeToggle: true,
@@ -78,6 +52,27 @@ const rectangleShapeSlice = createSlice({
         let updatedRectangle = {
           ...existingRectangle,
           width: (existingRectangle.width = newWidth),
+        };
+        let updatedRectangles = [...state.rectangles];
+        updatedRectangles[existingRectangleIndex] = updatedRectangle;
+      }
+      return;
+    },
+    setDragEndPosition: (state, action) => {
+      const { xAxis, yAxis, rectangle } = action.payload;
+      console.log(rectangle);
+
+      const id = rectangle.id;
+      const existingRectangleIndex = state.rectangles.findIndex(
+        (rectangleIndex) => rectangleIndex.id === id
+      );
+      const existingRectangle = state.rectangles[existingRectangleIndex];
+
+      if (existingRectangle) {
+        let updatedRectangle = {
+          ...existingRectangle,
+          x: (existingRectangle.x = xAxis),
+          y: (existingRectangle.y = yAxis),
         };
         let updatedRectangles = [...state.rectangles];
         updatedRectangles[existingRectangleIndex] = updatedRectangle;
@@ -178,6 +173,7 @@ export const {
   backToShape,
   addRectangle,
   getRectangleItem,
+  setDragEndPosition,
   setRectangleWidth,
   setRectangleHeight,
   setRectangleXAxis,

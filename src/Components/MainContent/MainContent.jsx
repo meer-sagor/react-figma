@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Stage, Layer, Rect } from "react-konva";
 import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
+import { setDragEndPosition } from "../../Store/RectangleShapeSlice";
 
 import classes from "./MainContent.module.css";
 import Properties from "../Properties/Properties";
@@ -76,6 +77,16 @@ const MainContent = () => {
                   height={rectangle.height}
                   fill={rectangle.fill}
                   draggable
+                  onDragEnd={(event) => {
+                    const xAxis = event.target.x();
+                    const yAxis = event.target.y();
+                    const axis = {
+                      xAxis,
+                      yAxis,
+                      rectangle
+                    };
+                    dispatch(setDragEndPosition(axis));
+                  }}
                 />
               ))}
             </Layer>
