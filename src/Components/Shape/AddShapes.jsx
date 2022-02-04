@@ -1,53 +1,53 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BiRectangle } from "react-icons/bi";
 import { BsCircle, BsTriangle } from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
-import { addRectangle, addCircle, addTriangle } from "../../Store/ShapesSlice";
+import { addRectangle } from "../../Store/RectangleShapeSlice";
 
 import classes from "./AddShapeList.module.css";
 
 const AddShapeList = () => {
-  const { x, y, width, height } = useSelector((state) => state.properties);
   const dispatch = useDispatch();
   const handleClick = (event) => {
     const innerText = event.target.innerText;
 
     if (innerText === "Rectangle") {
       const rectAngle = {
-        title: innerText,
+        name: innerText,
         id: uuidv4(),
-        x,
-        y,
-        width,
-        height,
-        fill: "red",
+        toggle: true,
+        x: 20,
+        y: 20,
+        width: 100,
+        height: 100,
+        fill: "green",
       };
       dispatch(addRectangle(rectAngle));
     }
-    if (innerText === "Circle") {
-      const circleData = {
-        title: innerText,
-        id: uuidv4(),
-        x: 20,
-        y: 40,
-        radius: 50,
-        fill: "green",
-      };
-      dispatch(addCircle(circleData));
-    }
-    if (innerText === "Triangle") {
-      const triangleData = {
-        title: innerText,
-        id: uuidv4(),
-        x: "20",
-        y: "20",
-        width: "200",
-        height: "200",
-        fill: "red",
-      };
-      dispatch(addTriangle(triangleData));
-    }
+    // if (innerText === "Circle") {
+    //   const circleData = {
+    //     name: innerText,
+    //     id: uuidv4(),
+    //     x: 20,
+    //     y: 40,
+    //     radius: 50,
+    //     fill: "green",
+    //   };
+    //   dispatch(addCircle(circleData));
+    // }
+    // if (innerText === "Triangle") {
+    //   const triangleData = {
+    //     name: innerText,
+    //     id: uuidv4(),
+    //     x: "20",
+    //     y: "20",
+    //     width: "200",
+    //     height: "200",
+    //     fill: "red",
+    //   };
+    //   dispatch(addTriangle(triangleData));
+    // }
   };
   return (
     <div className={classes.addShape}>

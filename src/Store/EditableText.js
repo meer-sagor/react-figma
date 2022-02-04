@@ -27,8 +27,7 @@ const editableTextSlice = createSlice({
       };
     },
     backToView: (state, action) => {
-      if (action.payload.key === "Enter" || action.payload.key === "Escape") {
-        action.payload.preventDefault();
+      if (action.payload === "Enter" || action.payload === "Escape") {
         return {
           ...state,
           toggle: true,
@@ -38,6 +37,7 @@ const editableTextSlice = createSlice({
   },
 });
 
-export const { setToggle, setNewText, setRectangleText, backToView } = editableTextSlice.actions;
+export const { setToggle, setNewText, setRectangleText, backToView } =
+  editableTextSlice.actions;
 
 export default editableTextSlice.reducer;

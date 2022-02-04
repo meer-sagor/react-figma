@@ -1,6 +1,6 @@
 import React from "react";
 import MainContent from "../MainContent/MainContent";
-import Properties from "../Properties/Properties";
+// import Properties from "../Properties/Properties";
 import Shape from "../Shape/Shape";
 
 const Layout = () => {
@@ -8,7 +8,7 @@ const Layout = () => {
     <>
       <Shape />
       <MainContent/>
-      <Properties />
+      {/* <Properties /> */}
     </>
   );
 };

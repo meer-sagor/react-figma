@@ -22,7 +22,9 @@
   margin-bottom: 1.5rem;
 }
 .form-control input[type='color']{
-  background: red;
+  /* background: red;
+   */
+   cursor: pointer;
 }
 .form-control input:focus {
   outline: none;

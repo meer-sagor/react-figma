@@ -6,28 +6,29 @@ import "tippy.js/themes/light.css";
 
 import Input from "../UI/Input";
 import ShapeExport from "./ShapeExport";
+
 import {
-  setWidth,
-  setHeigh,
-  setXAxis,
-  setYAxis,
-} from "../../Store/ShapePropertiesSlice";
+  setRectangleWidth,
+  setRectangleHeight,
+  setRectangleXAxis,
+  setRectangleYAxis,
+  setRectangleColor,
+} from "../../Store/RectangleShapeSlice";
 
 import classes from "./Properties.module.css";
-const Properties = () => {
-  const { rectangle, circle, triangle } = useSelector((state) => state.shapes);
+const Properties = ({ handlerExport }) => {
+  const { rectangles, selectedRectangle } = useSelector(
+    (state) => state.rectangle
+  );
   const dispatch = useDispatch();
-  const { rectangles } = rectangle;
-  const { circles } = circle;
-  const { triangles } = triangle;
+  const selectedId = selectedRectangle.id;
+  const selectedProperties = rectangles.filter(
+    (values) => values.id === selectedId
+  );
+  const values = selectedProperties[0];
 
   let isDisabled = true;
-
-  if (
-    circles.length !== 0 ||
-    rectangles.length !== 0 ||
-    triangles.length !== 0
-  ) {
+  if (rectangles.length !== 0) {
     isDisabled = false;
   }
 
@@ -41,7 +42,7 @@ const Properties = () => {
           theme="light"
           trigger="click"
           offset={[10, 10]}
-          content={<ShapeExport />}
+          content={<ShapeExport onClick={handlerExport} />}
         >
           <button className={classes["button-alt"]} disabled={isDisabled}>
             export
@@ -53,36 +54,45 @@ const Properties = () => {
       </div>
       <div className={classes["properties-content"]}>
         <h3 className={classes.title}>properties</h3>
-        <Input label={`rectangle`} disabled={isDisabled} />
         <Input
           disabled={isDisabled}
           label={`width`}
           type="number"
           min={0}
-          onChange={(event) => dispatch(setWidth(event.target.value))}
+          value={values?.width}
+          onChange={(event) => dispatch(setRectangleWidth(event.target.value))}
         />
         <Input
           disabled={isDisabled}
           label={`height`}
           type="number"
           min={0}
-          onChange={(event) => dispatch(setHeigh(event.target.value))}
+          value={values?.height}
+          onChange={(event) => dispatch(setRectangleHeight(event.target.value))}
         />
         <Input
           disabled={isDisabled}
           label={`x axis`}
           type="number"
           min={0}
-          onChange={(event) => dispatch(setXAxis(event.target.value))}
+          value={values?.x}
+          onChange={(event) => dispatch(setRectangleXAxis(event.target.value))}
         />
         <Input
           disabled={isDisabled}
           label={`y axis`}
           type="number"
           min={0}
-          onChange={(event) => dispatch(setYAxis(event.target.value))}
+          value={values?.y}
+          onChange={(event) => dispatch(setRectangleYAxis(event.target.value))}
         />
-        <Input disabled={isDisabled} label={`color`} type="text" />
+        <Input
+          disabled={isDisabled}
+          label={`color`}
+          type="color"
+          value={values?.fill}
+          onChange={(event) => dispatch(setRectangleColor(event.target.value))}
+        />
       </div>
     </div>
   );
