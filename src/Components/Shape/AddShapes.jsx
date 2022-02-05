@@ -9,12 +9,16 @@ import classes from "./AddShapeList.module.css";
 
 const AddShapeList = () => {
   const dispatch = useDispatch();
+  let globalNumber = 0;
+
   const handleClick = (event) => {
     const innerText = event.target.innerText;
+    globalNumber += 1;
+    const nameUpdate = innerText + globalNumber;
 
     if (innerText === "Rectangle") {
       const rectAngle = {
-        name: innerText,
+        name: nameUpdate,
         id: uuidv4(),
         toggle: true,
         x: 20,

@@ -33,3 +33,8 @@ div.properties[disabled],
   cursor: not-allowed;
   opacity: 0.5;
 }
+.delete-button {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+}

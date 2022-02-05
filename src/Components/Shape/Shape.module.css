@@ -45,7 +45,8 @@
 .shape-content .triangles p {
   display: flex;
   margin-bottom: 1rem;
-  border-bottom: 1px solid gray;
+   background: white;
+   border-radius: .2em;
 }
 
 .shape-content .rectangles p span,
@@ -59,12 +60,16 @@
 .shape-content .rectangles input,
 .shape-content .circles input,
 .shape-content .triangles input {
-  text-align: center;
+  text-align: left;
   margin-bottom: 0;
+  background: white;
+  padding: .1rem;
 }
 .edit-shape__layer--text {
   display: flex;
   align-items: center;
+  background: white;
+  margin-bottom: 1rem;
 }
 .edit-shape__layer--text span{
   font-size: 2rem;

@@ -60,7 +60,6 @@ const rectangleShapeSlice = createSlice({
     },
     setDragEndPosition: (state, action) => {
       const { xAxis, yAxis, rectangle } = action.payload;
-      console.log(rectangle);
 
       const id = rectangle.id;
       const existingRectangleIndex = state.rectangles.findIndex(

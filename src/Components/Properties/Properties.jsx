@@ -94,6 +94,7 @@ const Properties = ({ handlerExport }) => {
           style={{ background: `${values?.fill}` }}
           onChange={(event) => dispatch(setRectangleColor(event.target.value))}
         />
+      <button className={classes['delete-button']}>Delete</button>
       </div>
     </div>
   );

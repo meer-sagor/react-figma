@@ -1,18 +1,21 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Stage, Layer, Rect } from "react-konva";
+
 import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
 import { setDragEndPosition } from "../../Store/RectangleShapeSlice";
 
 import classes from "./MainContent.module.css";
 import Properties from "../Properties/Properties";
+
 const MainContent = () => {
   const { toggle, defaultText } = useSelector((state) => state.editText);
   const { rectangles } = useSelector((state) => state.rectangle);
 
   const dispatch = useDispatch();
   const stageRef = useRef(null);
+  const shapeRef = useRef()
 
   const downloadURL = (uri, name) => {
     var link = document.createElement("a");
@@ -94,6 +97,7 @@ const MainContent = () => {
         </div>
       </div>
       <Properties handlerExport={handlerExport} />
+
     </>
   );
 };
