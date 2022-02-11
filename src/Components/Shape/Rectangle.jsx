@@ -10,10 +10,10 @@ import {
   setShapeText,
   getRectangleItem,
   backToShape,
-} from "../../Store/RectangleShapeSlice";
+} from "../../Store/ShapesSlice";
 
 const Rectangle = () => {
-  const { shapeToggle, rectangles } = useSelector((state) => state.rectangle);
+  const { shapeToggle, rectangles } = useSelector((state) => state.shapes);
   const dispatch = useDispatch();
 
   const onDoubleClickHandler = () => {

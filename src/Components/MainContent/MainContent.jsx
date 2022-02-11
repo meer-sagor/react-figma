@@ -1,21 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Stage, Layer, Rect } from "react-konva";
+import Rectangle from "../Shape/Rectangle/Rectangle";
 
 import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
-import { setDragEndPosition } from "../../Store/RectangleShapeSlice";
+import { setDragEndPosition } from "../../Store/ShapesSlice";
 
 import classes from "./MainContent.module.css";
 import Properties from "../Properties/Properties";
 
 const MainContent = () => {
   const { toggle, defaultText } = useSelector((state) => state.editText);
-  const { rectangles } = useSelector((state) => state.rectangle);
+  const { rectangles } = useSelector((state) => state.shapes);
+  const [selectedId, selectShape] = useState(null);
+  const stageRef = useRef(null);
 
   const dispatch = useDispatch();
-  const stageRef = useRef(null);
-  const shapeRef = useRef()
+
 
   const downloadURL = (uri, name) => {
     var link = document.createElement("a");
@@ -64,13 +66,13 @@ const MainContent = () => {
 
         <div id={classes.content}>
           <Stage
-            height="400"
-            width="555"
+            height={400}
+            width={555}
             container={classes.content}
             ref={stageRef}
           >
             <Layer>
-              {rectangles.map((rectangle) => (
+              {/* {rectangles.map((rectangle) => (
                 <Rect
                   key={rectangle.id}
                   name={rectangle.name}
@@ -91,13 +93,32 @@ const MainContent = () => {
                     dispatch(setDragEndPosition(axis));
                   }}
                 />
-              ))}
+              ))} */}
+
+              {rectangles.map((rect, i) => {
+                return (
+                  <Rectangle
+                    key={rect.id}
+                    shapeProps={rect}
+                    isSelected={rect.id === selectedId}
+                    onSelect={() => {
+                      selectShape(rect.id);
+                    }}
+                    onChange={(newAttrs) => {
+                      const rects = rectangles.slice();
+                      rects[i] = newAttrs;
+                      // setRectangles(rects);
+                      // console.log(rects);
+                      // dispatch(updateRectangleProperties(rects));
+                    }}
+                  />
+                );
+              })}
             </Layer>
           </Stage>
         </div>
       </div>
       <Properties handlerExport={handlerExport} />
-
     </>
   );
 };

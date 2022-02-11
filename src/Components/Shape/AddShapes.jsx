@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { BiRectangle } from "react-icons/bi";
 import { BsCircle, BsTriangle } from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
-import { addRectangle } from "../../Store/RectangleShapeSlice";
+import { addRectangle } from "../../Store/ShapesSlice";
 
 import classes from "./AddShapeList.module.css";
 

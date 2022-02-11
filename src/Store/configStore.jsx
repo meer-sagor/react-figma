@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import editableTextReducer from "./EditableText";
-import rectangleShapeSliceReducer from "./RectangleShapeSlice";
+import ShapesSliceReducer from "./ShapesSlice";
 
 const Store = configureStore({
   reducer: {
     editText: editableTextReducer,
-    rectangle: rectangleShapeSliceReducer,
+    shapes: ShapesSliceReducer,
   },
 });
 

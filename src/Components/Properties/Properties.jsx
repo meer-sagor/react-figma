@@ -7,18 +7,12 @@ import "tippy.js/themes/light.css";
 import Input from "../UI/Input";
 import ShapeExport from "./ShapeExport";
 
-import {
-  setRectangleWidth,
-  setRectangleHeight,
-  setRectangleXAxis,
-  setRectangleYAxis,
-  setRectangleColor,
-} from "../../Store/RectangleShapeSlice";
+import { shapePropertiesValueUpdate } from "../../Store/ShapesSlice";
 
 import classes from "./Properties.module.css";
 const Properties = ({ handlerExport }) => {
-  const { rectangles, selectedRectangle } = useSelector(
-    (state) => state.rectangle
+  const { rectangles, selectedRectangle, shapePropertiesValue } = useSelector(
+    (state) => state.shapes
   );
   const dispatch = useDispatch();
   const selectedId = selectedRectangle.id;
@@ -31,6 +25,16 @@ const Properties = ({ handlerExport }) => {
   if (rectangles.length !== 0) {
     isDisabled = false;
   }
+  const valueChangeHandler = (event) => {
+    const { name, value } = event.target;
+
+    dispatch(
+      shapePropertiesValueUpdate({
+        ...selectedProperties[0],
+        [name]: value,
+      })
+    );
+  };
 
   return (
     <div className={classes["properties"]} disabled={isDisabled}>
@@ -57,44 +61,51 @@ const Properties = ({ handlerExport }) => {
         <Input
           disabled={isDisabled}
           label={`width`}
+          name= 'width'
           type="number"
           min={0}
           value={values?.width}
-          onChange={(event) => dispatch(setRectangleWidth(event.target.value))}
+          onChange={valueChangeHandler}
         />
         <Input
           disabled={isDisabled}
           label={`height`}
           type="number"
+          name="height"
           min={0}
           value={values?.height}
-          onChange={(event) => dispatch(setRectangleHeight(event.target.value))}
+          onChange={valueChangeHandler}
         />
         <Input
           disabled={isDisabled}
           label={`x axis`}
           type="number"
+          name="x"
           min={0}
           value={values?.x}
-          onChange={(event) => dispatch(setRectangleXAxis(event.target.value))}
+          onChange={valueChangeHandler}
         />
         <Input
           disabled={isDisabled}
           label={`y axis`}
           type="number"
+          name="y"
           min={0}
           value={values?.y}
-          onChange={(event) => dispatch(setRectangleYAxis(event.target.value))}
+          onChange={valueChangeHandler}
         />
         <Input
           disabled={isDisabled}
           label={`color`}
           type="color"
+          name='fill'
           value={values?.fill}
           style={{ background: `${values?.fill}` }}
-          onChange={(event) => dispatch(setRectangleColor(event.target.value))}
+          onChange={valueChangeHandler}
         />
-      <button className={classes['delete-button']}>Delete</button>
+        <button className={classes["delete-button"]} onClick={() => {}}>
+          Delete
+        </button>
       </div>
     </div>
   );
