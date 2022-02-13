@@ -1,14 +1,7 @@
 import React, { useRef, useEffect } from "react";
+import { Circle, Transformer } from "react-konva";
 
-import { Rect, Transformer } from "react-konva";
-
-const Rectangle = ({
-  shapeProps,
-  isSelected,
-  onSelect,
-  onChange,
-  onDragEnd,
-}) => {
+const Circles = ({ shapeProps, isSelected, onSelect, onChange }) => {
   const shapeRef = useRef();
   const trRef = useRef();
 
@@ -22,13 +15,19 @@ const Rectangle = ({
 
   return (
     <React.Fragment>
-      <Rect
+      <Circle
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
         draggable
-        onDragEnd={onDragEnd}
+        onDragEnd={(e) => {
+          onChange({
+            ...shapeProps,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+        }}
         onTransformEnd={(e) => {
           // transformer is changing scale of the node
           // and NOT its width or height
@@ -67,4 +66,4 @@ const Rectangle = ({
   );
 };
 
-export default Rectangle;
+export default Circles;

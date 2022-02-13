@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Stage, Layer, Rect } from "react-konva";
+import { Stage, Layer } from "react-konva";
 import Rectangle from "../Shape/Rectangle/Rectangle";
+import Circles from "../Shape/Circle/Circle";
+import Triangle from "../Shape/Triangle/Triangle";
 
 import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
@@ -12,13 +14,21 @@ import Properties from "../Properties/Properties";
 
 const MainContent = () => {
   const { toggle, defaultText } = useSelector((state) => state.editText);
-  const { rectangles } = useSelector((state) => state.shapes);
+  const { rectangles, circles, triangles } = useSelector(
+    (state) => state.shapes
+  );
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
 
   const dispatch = useDispatch();
 
-
+  const checkDeselect = (e) => {
+    // deselect when clicked on empty area
+    const clickedOnEmpty = e.target === e.target.getStage();
+    if (clickedOnEmpty) {
+      selectShape(null);
+    }
+  };
   const downloadURL = (uri, name) => {
     var link = document.createElement("a");
     link.download = name;
@@ -70,31 +80,10 @@ const MainContent = () => {
             width={555}
             container={classes.content}
             ref={stageRef}
+            onMouseDown={checkDeselect}
+            onTouchStart={checkDeselect}
           >
             <Layer>
-              {/* {rectangles.map((rectangle) => (
-                <Rect
-                  key={rectangle.id}
-                  name={rectangle.name}
-                  x={rectangle.x}
-                  y={rectangle.y}
-                  width={rectangle.width}
-                  height={rectangle.height}
-                  fill={rectangle.fill}
-                  draggable
-                  onDragEnd={(event) => {
-                    const xAxis = event.target.x();
-                    const yAxis = event.target.y();
-                    const axis = {
-                      xAxis,
-                      yAxis,
-                      rectangle
-                    };
-                    dispatch(setDragEndPosition(axis));
-                  }}
-                />
-              ))} */}
-
               {rectangles.map((rect, i) => {
                 return (
                   <Rectangle
@@ -110,6 +99,52 @@ const MainContent = () => {
                       // setRectangles(rects);
                       // console.log(rects);
                       // dispatch(updateRectangleProperties(rects));
+                    }}
+                    onDragEnd={(e) => {
+                      const xAxis = e.target.x();
+                      const yAxis = e.target.y();
+                      const axis = {
+                        xAxis,
+                        yAxis,
+                        rect,
+                      };
+                      dispatch(setDragEndPosition(axis));
+                    }}
+                  />
+                );
+              })}
+              {circles.map((cir) => {
+                return (
+                  <Circles
+                    key={cir.id}
+                    shapeProps={cir}
+                    isSelected={cir.id === selectedId}
+                    onSelect={() => {
+                      selectShape(cir.id);
+                    }}
+                    onChange={(newAttrs) => {
+                      const circl = circles.slice();
+                      circl[cir.id] = newAttrs;
+                      // setCircles(circl);
+                      // dispatch(updateCircleProperties(circl));
+                    }}
+                  />
+                );
+              })}
+              {triangles.map((cir) => {
+                return (
+                  <Triangle
+                    key={cir.id}
+                    shapeProps={cir}
+                    isSelected={cir.id === selectedId}
+                    onSelect={() => {
+                      selectShape(cir.id);
+                    }}
+                    onChange={(newAttrs) => {
+                      const circl = circles.slice();
+                      circl[cir.id] = newAttrs;
+                      // setCircles(circl);
+                      // dispatch(updateCircleProperties(circl));
                     }}
                   />
                 );

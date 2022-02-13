@@ -5,14 +5,12 @@ const ShapesSlice = createSlice({
   initialState: {
     shapeToggle: true,
     rectangles: [],
-    selectedRectangle: {},
-    shapePropertiesValue: {
-      width: "",
-      height: "",
-      xAxis: "",
-      yAxis: undefined,
-      color: "",
-    },
+    circles: [],
+    triangles: [],
+    selectedItem: {},
+    shapeRectanglePropertiesValue: {},
+    shapeCirclePropertiesValue: {},
+    shapeTrianglePropertiesValue: {},
   },
   reducers: {
     setShapeToggle: (state) => {
@@ -21,10 +19,9 @@ const ShapesSlice = createSlice({
         shapeToggle: false,
       };
     },
-    shapePropertiesValueUpdate: (state, action) => {
-      const id = state.selectedRectangle.id;
+    shapeRectanglePropertiesValueUpdate: (state, action) => {
+      const id = state.selectedItem.id;
       const { width, height, x, y, fill } = action.payload;
-
 
       const existingRectangleIndex = state.rectangles.findIndex(
         (rectangleIndex) => rectangleIndex.id === id
@@ -44,6 +41,30 @@ const ShapesSlice = createSlice({
         updatedRectangles[existingRectangleIndex] = updatedRectangle;
       }
       return;
+    },
+    shapeCirclePropertiesValueUpdate: (state, action) => {
+      console.log(action.payload);
+      // const id = state.selectedItem.id;
+      // const { width, height, x, y, fill } = action.payload;
+
+      // const existingRectangleIndex = state.rectangles.findIndex(
+      //   (rectangleIndex) => rectangleIndex.id === id
+      // );
+      // const existingRectangle = state.rectangles[existingRectangleIndex];
+
+      // if (existingRectangle) {
+      //   let updatedRectangle = {
+      //     ...existingRectangle,
+      //     width: (existingRectangle.width = parseInt(width)),
+      //     height: (existingRectangle.height = parseInt(height)),
+      //     x: (existingRectangle.x = parseInt(x)),
+      //     y: (existingRectangle.y = parseInt(y)),
+      //     fill: (existingRectangle.fill = fill),
+      //   };
+      //   let updatedRectangles = [...state.rectangles];
+      //   updatedRectangles[existingRectangleIndex] = updatedRectangle;
+      // }
+      // return;
     },
 
     setShapeText: (state, action) => {
@@ -72,11 +93,10 @@ const ShapesSlice = createSlice({
       }
     },
 
-
     setDragEndPosition: (state, action) => {
-      const { xAxis, yAxis, rectangle } = action.payload;
+      const { xAxis, yAxis, rect } = action.payload;
 
-      const id = rectangle.id;
+      const id = rect.id;
       const existingRectangleIndex = state.rectangles.findIndex(
         (rectangleIndex) => rectangleIndex.id === id
       );
@@ -97,11 +117,17 @@ const ShapesSlice = createSlice({
     addRectangle: (state, action) => {
       state.rectangles.push(action.payload);
     },
-    getRectangleItem: (state, action) => {
+    addCircle: (state, action) => {
+      state.circles.push(action.payload);
+    },
+    addTriangle: (state, action) => {
+      state.triangles.push(action.payload);
+    },
+    getShapeItem: (state, action) => {
       const item = action.payload;
       return {
         ...state,
-        selectedRectangle: item,
+        selectedItem: item,
       };
     },
   },
@@ -112,9 +138,12 @@ export const {
   setShapeText,
   backToShape,
   addRectangle,
-  getRectangleItem,
+  addCircle,
+  addTriangle,
+  getShapeItem,
   setDragEndPosition,
-  shapePropertiesValueUpdate,
+  shapeRectanglePropertiesValueUpdate,
+  shapeCirclePropertiesValueUpdate
 } = ShapesSlice.actions;
 
 export default ShapesSlice.reducer;

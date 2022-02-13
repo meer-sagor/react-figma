@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 
-import { Rect, Transformer } from "react-konva";
+import { Line, Transformer } from "react-konva";
 
-const Rectangle = ({
+const Triangle = ({
   shapeProps,
   isSelected,
   onSelect,
@@ -22,7 +22,7 @@ const Rectangle = ({
 
   return (
     <React.Fragment>
-      <Rect
+      <Line
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
@@ -67,4 +67,4 @@ const Rectangle = ({
   );
 };
 
-export default Rectangle;
+export default Triangle;

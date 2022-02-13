@@ -7,29 +7,36 @@ import "tippy.js/themes/light.css";
 import Input from "../UI/Input";
 import ShapeExport from "./ShapeExport";
 
-import { shapePropertiesValueUpdate } from "../../Store/ShapesSlice";
+import {
+  shapeRectanglePropertiesValueUpdate,
+  shapeCirclePropertiesValueUpdate,
+} from "../../Store/ShapesSlice";
 
 import classes from "./Properties.module.css";
 const Properties = ({ handlerExport }) => {
-  const { rectangles, selectedRectangle, shapePropertiesValue } = useSelector(
+  const { rectangles, circles, triangles, selectedItem } = useSelector(
     (state) => state.shapes
   );
   const dispatch = useDispatch();
-  const selectedId = selectedRectangle.id;
-  const selectedProperties = rectangles.filter(
+  const selectedId = selectedItem.id;
+  let selectedProperties = rectangles.filter(
     (values) => values.id === selectedId
   );
+
   const values = selectedProperties[0];
 
   let isDisabled = true;
-  if (rectangles.length !== 0) {
+  if (
+    rectangles.length !== 0 ||
+    circles.length !== 0 ||
+    triangles.length !== 0
+  ) {
     isDisabled = false;
   }
   const valueChangeHandler = (event) => {
     const { name, value } = event.target;
-
     dispatch(
-      shapePropertiesValueUpdate({
+      shapeRectanglePropertiesValueUpdate({
         ...selectedProperties[0],
         [name]: value,
       })
@@ -61,7 +68,7 @@ const Properties = ({ handlerExport }) => {
         <Input
           disabled={isDisabled}
           label={`width`}
-          name= 'width'
+          name="width"
           type="number"
           min={0}
           value={values?.width}
@@ -98,12 +105,16 @@ const Properties = ({ handlerExport }) => {
           disabled={isDisabled}
           label={`color`}
           type="color"
-          name='fill'
+          name="fill"
           value={values?.fill}
           style={{ background: `${values?.fill}` }}
           onChange={valueChangeHandler}
         />
-        <button className={classes["delete-button"]} onClick={() => {}}>
+        <button
+          className={classes["delete-button"]}
+          onClick={() => {}}
+          disabled={isDisabled}
+        >
           Delete
         </button>
       </div>

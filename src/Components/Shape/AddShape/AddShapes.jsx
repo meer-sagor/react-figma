@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import { BiRectangle } from "react-icons/bi";
 import { BsCircle, BsTriangle } from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
-import { addRectangle } from "../../Store/ShapesSlice";
+import {
+  addRectangle,
+  addCircle,
+  addTriangle,
+} from "../../../Store/ShapesSlice";
 
 import classes from "./AddShapeList.module.css";
 
@@ -25,33 +29,39 @@ const AddShapeList = () => {
         y: 20,
         width: 100,
         height: 100,
-        fill: "green",
+        fill: "red",
       };
       dispatch(addRectangle(rectAngle));
     }
-    // if (innerText === "Circle") {
-    //   const circleData = {
-    //     name: innerText,
-    //     id: uuidv4(),
-    //     x: 20,
-    //     y: 40,
-    //     radius: 50,
-    //     fill: "green",
-    //   };
-    //   dispatch(addCircle(circleData));
-    // }
-    // if (innerText === "Triangle") {
-    //   const triangleData = {
-    //     name: innerText,
-    //     id: uuidv4(),
-    //     x: "20",
-    //     y: "20",
-    //     width: "200",
-    //     height: "200",
-    //     fill: "red",
-    //   };
-    //   dispatch(addTriangle(triangleData));
-    // }
+    if (innerText === "Circle") {
+      const circleData = {
+        name: nameUpdate,
+        id: uuidv4(),
+        toggle: true,
+        x: 200,
+        y: 100,
+        width: 100,
+        height: 100,
+        radius: 50,
+        fill: "green",
+      };
+      dispatch(addCircle(circleData));
+    }
+    if (innerText === "Triangle") {
+      const triangleData = {
+        name: nameUpdate,
+        id: uuidv4(),
+        toggle: true,
+        x: 300,
+        y: 200,
+        width: 20,
+        height: 20,
+        points: [0, 0, 200, 0, 100, -150],
+        closed: true,
+        fill: "blue",
+      };
+      dispatch(addTriangle(triangleData));
+    }
   };
   return (
     <div className={classes.addShape}>
