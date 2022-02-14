@@ -2,7 +2,7 @@ import React from "react";
 import Tippy from "@tippyjs/react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoTriangleDown } from "react-icons/go";
-import { BsCircleFill,BsTriangleFill } from "react-icons/bs";
+import { BsCircleFill, BsTriangleFill } from "react-icons/bs";
 import { RiCheckboxBlankFill } from "react-icons/ri";
 import AddShapeList from "./AddShape/AddShapes";
 import Input from "../UI/Input";
@@ -24,8 +24,8 @@ const Shape = () => {
   );
   const dispatch = useDispatch();
 
-  const onDoubleClickHandler = () => {
-    dispatch(setShapeToggle());
+  const onDoubleClickHandler = (rect) => {
+    dispatch(setShapeToggle(rect));
   };
 
   const inputChangeHandler = (id, event) => {
@@ -36,11 +36,15 @@ const Shape = () => {
     };
     dispatch(setShapeText(obj));
   };
-  const onKeyDownHandler = (event) => {
+  const onKeyDownHandler = (event, rect) => {
     const keys = event.key;
-
-    dispatch(backToShape(keys));
+    const obj = {
+      keys,
+      rect,
+    };
+    dispatch(backToShape(obj));
   };
+
   return (
     <div className={classes["shape"]}>
       <div className={classes["shape-actions"]}>
@@ -63,7 +67,7 @@ const Shape = () => {
         <h3 className={classes.title}>Shapes</h3>
         <div className={classes.rectangles}>
           {rectangles.map((rect) =>
-            shapeToggle ? (
+            rect.toggle ? (
               <p
                 key={rect.id}
                 onDoubleClick={() => onDoubleClickHandler(rect)}
@@ -85,7 +89,7 @@ const Shape = () => {
                   type="text"
                   value={rect.name}
                   onChange={(event) => inputChangeHandler(rect.id, event)}
-                  onKeyDown={onKeyDownHandler}
+                  onKeyDown={(event) => onKeyDownHandler(event, rect)}
                 />
               </div>
             )

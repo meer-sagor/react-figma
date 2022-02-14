@@ -11,19 +11,23 @@ import {
 
 import classes from "./AddShapeList.module.css";
 
+let rectangle = 0;
+let circle = 0;
+let triangle = 0;
 const AddShapeList = () => {
   const dispatch = useDispatch();
-  let globalNumber = 0;
 
   const handleClick = (event) => {
     const innerText = event.target.innerText;
-    globalNumber += 1;
-    const nameUpdate = innerText + globalNumber;
 
     if (innerText === "Rectangle") {
+      rectangle++;
+      const nameUpdate = innerText + rectangle;
+
       const rectAngle = {
         name: nameUpdate,
         id: uuidv4(),
+        shapeCategory: 'rectangles',
         toggle: true,
         x: 20,
         y: 20,
@@ -34,9 +38,12 @@ const AddShapeList = () => {
       dispatch(addRectangle(rectAngle));
     }
     if (innerText === "Circle") {
+      circle++;
+      const nameUpdate = innerText + circle;
       const circleData = {
         name: nameUpdate,
         id: uuidv4(),
+        shapeCategory: 'circles',
         toggle: true,
         x: 200,
         y: 100,
@@ -48,9 +55,12 @@ const AddShapeList = () => {
       dispatch(addCircle(circleData));
     }
     if (innerText === "Triangle") {
+      triangle++;
+      const nameUpdate = innerText + triangle;
       const triangleData = {
         name: nameUpdate,
         id: uuidv4(),
+        shapeCategory: 'triangles',
         toggle: true,
         x: 300,
         y: 200,

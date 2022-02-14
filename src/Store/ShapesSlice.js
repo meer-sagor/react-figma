@@ -13,16 +13,8 @@ const ShapesSlice = createSlice({
     shapeTrianglePropertiesValue: {},
   },
   reducers: {
-    setShapeToggle: (state) => {
-      return {
-        ...state,
-        shapeToggle: false,
-      };
-    },
-    shapeRectanglePropertiesValueUpdate: (state, action) => {
-      const id = state.selectedItem.id;
-      const { width, height, x, y, fill } = action.payload;
-
+    setShapeToggle: (state, action) => {
+      const id = action.payload.id;
       const existingRectangleIndex = state.rectangles.findIndex(
         (rectangleIndex) => rectangleIndex.id === id
       );
@@ -31,40 +23,57 @@ const ShapesSlice = createSlice({
       if (existingRectangle) {
         let updatedRectangle = {
           ...existingRectangle,
-          width: (existingRectangle.width = parseInt(width)),
-          height: (existingRectangle.height = parseInt(height)),
-          x: (existingRectangle.x = parseInt(x)),
-          y: (existingRectangle.y = parseInt(y)),
-          fill: (existingRectangle.fill = fill),
+          toggle: (existingRectangle.toggle = false),
         };
         let updatedRectangles = [...state.rectangles];
         updatedRectangles[existingRectangleIndex] = updatedRectangle;
       }
       return;
     },
-    shapeCirclePropertiesValueUpdate: (state, action) => {
+    backToShape: (state, action) => {
+      const { keys, rect } = action.payload;
       console.log(action.payload);
-      // const id = state.selectedItem.id;
-      // const { width, height, x, y, fill } = action.payload;
+      if (keys === "Enter" || keys === "Escape") {
+        const id = rect.id;
+        const existingRectangleIndex = state.rectangles.findIndex(
+          (rectangleIndex) => rectangleIndex.id === id
+        );
+        const existingRectangle = state.rectangles[existingRectangleIndex];
 
-      // const existingRectangleIndex = state.rectangles.findIndex(
-      //   (rectangleIndex) => rectangleIndex.id === id
-      // );
-      // const existingRectangle = state.rectangles[existingRectangleIndex];
+        if (existingRectangle) {
+          let updatedRectangle = {
+            ...existingRectangle,
+            toggle: (existingRectangle.toggle = true),
+          };
+          let updatedRectangles = [...state.rectangles];
+          updatedRectangles[existingRectangleIndex] = updatedRectangle;
+        }
+        return;
+      }
+    },
+    shapePropertiesValueUpdate: (state, action) => {
+      const id = state.selectedItem.id;
+      const { width, height, x, y, fill } = action.payload.value;
 
-      // if (existingRectangle) {
-      //   let updatedRectangle = {
-      //     ...existingRectangle,
-      //     width: (existingRectangle.width = parseInt(width)),
-      //     height: (existingRectangle.height = parseInt(height)),
-      //     x: (existingRectangle.x = parseInt(x)),
-      //     y: (existingRectangle.y = parseInt(y)),
-      //     fill: (existingRectangle.fill = fill),
-      //   };
-      //   let updatedRectangles = [...state.rectangles];
-      //   updatedRectangles[existingRectangleIndex] = updatedRectangle;
-      // }
-      // return;
+      const existingShapeIndex = state[action.payload.shapeType].findIndex(
+        (rectangleIndex) => rectangleIndex.id === id
+      );
+      const existingShape =
+        state[action.payload.shapeType][existingShapeIndex];
+
+      if (existingShape) {
+        let updatedRectangle = {
+          ...existingShape,
+          width: (existingShape.width = parseInt(width)),
+          height: (existingShape.height = parseInt(height)),
+          x: (existingShape.x = parseInt(x)),
+          y: (existingShape.y = parseInt(y)),
+          fill: (existingShape.fill = fill),
+        };
+        let updatedShapes = [...state[action.payload.shapeType]];
+        updatedShapes[existingShapeIndex] = updatedRectangle;
+      }
+      return;
     },
 
     setShapeText: (state, action) => {
@@ -82,15 +91,6 @@ const ShapesSlice = createSlice({
         updatedRectangles[existingRectangleIndex] = updatedRectangle;
       }
       return;
-    },
-    backToShape: (state, action) => {
-      const keys = action.payload;
-      if (keys === "Enter" || keys === "Escape") {
-        return {
-          ...state,
-          shapeToggle: true,
-        };
-      }
     },
 
     setDragEndPosition: (state, action) => {
@@ -142,8 +142,7 @@ export const {
   addTriangle,
   getShapeItem,
   setDragEndPosition,
-  shapeRectanglePropertiesValueUpdate,
-  shapeCirclePropertiesValueUpdate
+  shapePropertiesValueUpdate,
 } = ShapesSlice.actions;
 
 export default ShapesSlice.reducer;

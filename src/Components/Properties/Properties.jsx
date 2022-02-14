@@ -7,10 +7,7 @@ import "tippy.js/themes/light.css";
 import Input from "../UI/Input";
 import ShapeExport from "./ShapeExport";
 
-import {
-  shapeRectanglePropertiesValueUpdate,
-  shapeCirclePropertiesValueUpdate,
-} from "../../Store/ShapesSlice";
+import { shapePropertiesValueUpdate } from "../../Store/ShapesSlice";
 
 import classes from "./Properties.module.css";
 const Properties = ({ handlerExport }) => {
@@ -19,7 +16,8 @@ const Properties = ({ handlerExport }) => {
   );
   const dispatch = useDispatch();
   const selectedId = selectedItem.id;
-  let selectedProperties = rectangles.filter(
+  console.log(selectedItem.shapeType);
+  let selectedProperties = [...rectangles, ...circles, ...triangles].filter(
     (values) => values.id === selectedId
   );
 
@@ -34,11 +32,15 @@ const Properties = ({ handlerExport }) => {
     isDisabled = false;
   }
   const valueChangeHandler = (event) => {
+    console.log(event);
     const { name, value } = event.target;
     dispatch(
-      shapeRectanglePropertiesValueUpdate({
-        ...selectedProperties[0],
-        [name]: value,
+      shapePropertiesValueUpdate({
+        value: {
+          ...selectedProperties[0],
+          [name]: value,
+        },
+        shapeType: selectedItem.shapeCategory,
       })
     );
   };

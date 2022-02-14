@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
-    "dev": "react-scripts dev"
+    "dev": "react-scripts dev",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
