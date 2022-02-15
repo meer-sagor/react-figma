@@ -16,7 +16,6 @@ const Properties = ({ handlerExport }) => {
   );
   const dispatch = useDispatch();
   const selectedId = selectedItem.id;
-  console.log(selectedItem.shapeType);
   let selectedProperties = [...rectangles, ...circles, ...triangles].filter(
     (values) => values.id === selectedId
   );

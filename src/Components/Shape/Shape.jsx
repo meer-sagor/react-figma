@@ -94,20 +94,34 @@ const Shape = () => {
               </div>
             )
           )}
-          {circles.map((cir) => (
-            <p
-              key={cir.id}
-              onDoubleClick={() => onDoubleClickHandler(cir)}
-              onClick={() => {
-                dispatch(getShapeItem(cir));
-              }}
-            >
-              <span style={{ color: `${cir.fill}` }}>
-                <BsCircleFill />
-              </span>
-              {cir.name}
-            </p>
-          ))}
+          {circles.map((cir) =>
+            cir.toggle ? (
+              <p
+                key={cir.id}
+                onDoubleClick={() => onDoubleClickHandler(cir)}
+                onClick={() => {
+                  dispatch(getShapeItem(cir));
+                }}
+              >
+                <span style={{ color: `${cir.fill}` }}>
+                  <BsCircleFill />
+                </span>
+                {cir.name}
+              </p>
+            ) : (
+              <div className={classes["edit-shape__layer--text"]} key={cir.id}>
+                <span style={{ color: `${cir.fill}` }}>
+                  <RiCheckboxBlankFill />
+                </span>
+                <Input
+                  type="text"
+                  value={cir.name}
+                  onChange={(event) => inputChangeHandler(cir.id, event)}
+                  onKeyDown={(event) => onKeyDownHandler(event, cir)}
+                />
+              </div>
+            )
+          )}
           {triangles.map((tri) => (
             <p
               key={tri.id}

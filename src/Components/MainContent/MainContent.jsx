@@ -7,7 +7,7 @@ import Triangle from "../Shape/Triangle/Triangle";
 
 import Input from "../UI/Input";
 import { setToggle, setNewText, backToView } from "../../Store/EditableText";
-import { setDragEndPosition } from "../../Store/ShapesSlice";
+import { setDragEndPosition, getShapeItem } from "../../Store/ShapesSlice";
 
 import classes from "./MainContent.module.css";
 import Properties from "../Properties/Properties";
@@ -92,6 +92,7 @@ const MainContent = () => {
                     isSelected={rect.id === selectedId}
                     onSelect={() => {
                       selectShape(rect.id);
+                      dispatch(getShapeItem(rect));
                     }}
                     onChange={(newAttrs) => {
                       const rects = rectangles.slice();
@@ -121,6 +122,7 @@ const MainContent = () => {
                     isSelected={cir.id === selectedId}
                     onSelect={() => {
                       selectShape(cir.id);
+                      dispatch(getShapeItem(cir));
                     }}
                     onChange={(newAttrs) => {
                       const circl = circles.slice();
@@ -131,18 +133,19 @@ const MainContent = () => {
                   />
                 );
               })}
-              {triangles.map((cir) => {
+              {triangles.map((tri) => {
                 return (
                   <Triangle
-                    key={cir.id}
-                    shapeProps={cir}
-                    isSelected={cir.id === selectedId}
+                    key={tri.id}
+                    shapeProps={tri}
+                    isSelected={tri.id === selectedId}
                     onSelect={() => {
-                      selectShape(cir.id);
+                      selectShape(tri.id);
+                      dispatch(getShapeItem(tri));
                     }}
                     onChange={(newAttrs) => {
-                      const circl = circles.slice();
-                      circl[cir.id] = newAttrs;
+                      const triangle = triangles.slice();
+                      triangle[tri.id] = newAttrs;
                       // setCircles(circl);
                       // dispatch(updateCircleProperties(circl));
                     }}

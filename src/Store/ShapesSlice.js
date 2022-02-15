@@ -32,7 +32,6 @@ const ShapesSlice = createSlice({
     },
     backToShape: (state, action) => {
       const { keys, rect } = action.payload;
-      console.log(action.payload);
       if (keys === "Enter" || keys === "Escape") {
         const id = rect.id;
         const existingRectangleIndex = state.rectangles.findIndex(
